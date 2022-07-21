@@ -22,10 +22,15 @@ namespace CarSuggestion
             var suggestedList = new List<string>();
             foreach (var car in carList)
             {
-                if (car.ToLower().Contains(name))
+                int l = name.Length;
+                if (car.Length >= l)
                 {
-                    suggestedList.Add(car);
 
+                    if (car.Substring(0, l).ToLower() == name.ToLower())
+                    {
+                        suggestedList.Add(car);
+
+                    }
                 }
             }
             
