@@ -11,7 +11,8 @@
         <div>
             <h2 id="detail" runat="server"></h2>
         </div>
-        <asp:GridView ID="detailGrid" runat="server" AutoGenerateColumns="False" OnRowEditing="detailGrid_RowEditing" OnRowCancelingEdit="detailGrid_RowCancelingEdit" OnRowDeleting="detailGrid_RowDeleting" OnRowUpdating="detailGrid_RowUpdating">
+        <asp:GridView ID="detailGrid" runat="server" AutoGenerateColumns="False" OnRowEditing="detailGrid_RowEditing" OnRowCancelingEdit="detailGrid_RowCancelingEdit" OnRowDeleting="detailGrid_RowDeleting" OnRowUpdating="detailGrid_RowUpdating" EnableViewState="False" CellPadding="4" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="detailGrid_SelectedIndexChanged" >
+            <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:TemplateField HeaderText="ID">
                     <EditItemTemplate>
@@ -66,7 +67,22 @@
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
+            <EditRowStyle BackColor="#2461BF" />
+            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+            <RowStyle BackColor="#EFF3FB" />
+            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+            <SortedAscendingCellStyle BackColor="#F5F7FB" />
+            <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+            <SortedDescendingCellStyle BackColor="#E9EBEF" />
+            <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
+        <br />
+        <asp:Label ID="DeleteNote" runat="server"></asp:Label>
+        <p>
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Go back to Employee Table" />
+        </p>
     </form>
 </body>
 </html>

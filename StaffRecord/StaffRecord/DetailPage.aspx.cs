@@ -13,25 +13,33 @@ namespace StaffRecord
     {
         object dataInSession;
         List<Employee> employeeDetails;
-        List<Employee> dataInsessionList;
+        List<StaffRecord.Employee> dataInsessionList;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+           
+         
             
             string idStr = Session["id"].ToString();
-            int id = Convert.ToInt32(idStr.Substring(0, idStr.Length - 2));
-             dataInSession = Session["staffData"];
-             dataInsessionList = (List<Employee>)dataInSession;
-             employeeDetails = new List<Employee>() { dataInsessionList[id-1] };
+            int id = Convert.ToInt32(idStr);
+
+            dataInSession = Session["staffData"];
+            dataInsessionList = (List<StaffRecord.Employee>)dataInSession;
+            var employee = from emp in dataInsessionList
+                           where emp.Id == id
+                           select emp;
+            Employee empd = employee.First<Employee>();
+            employeeDetails = new List<Employee>() { empd };
             detailGrid.DataSource = employeeDetails;
             detailGrid.DataBind();
         }
 
         protected void detailGrid_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            detailGrid.EditIndex = e.NewEditIndex;
-            detailGrid.DataSource = employeeDetails;
-            detailGrid.DataBind();
+            
+                detailGrid.EditIndex = e.NewEditIndex;
+                detailGrid.DataSource = employeeDetails;
+                detailGrid.DataBind();
+            
 
         }
 
@@ -53,26 +61,25 @@ namespace StaffRecord
 
 
             string idStr = Convert.ToString(idL.Text);
-            int id = Convert.ToInt32(idStr.Substring(0, idStr.Length - 2));
+            int id = Convert.ToInt32(idStr);
 
             dataInSession = Session["staffData"];
-            dataInsessionList = (List<Employee>)dataInSession;
-            dataInsessionList = (List<Employee>)dataInSession;
-            Employee updatingEmpolyee = dataInsessionList[id - 1];
-            try
-            {
-            updatingEmpolyee.Name = name.Text;
-            updatingEmpolyee.Role = role.Text;
-            updatingEmpolyee.Salary = Convert.ToDouble(salary.Text);
-            updatingEmpolyee.Address = address.Text;
-            }
-            catch
-            {
-                double orgSalary = 9;
-            }
-            
+            dataInsessionList = (List<StaffRecord.Employee>)dataInSession;
 
-            dataInsessionList[id - 1] = updatingEmpolyee;
+            dataInsessionList.Where(w => w.Id == id).ToList().ForEach(i =>
+           { i.Name = name.Text;
+               i.Role = role.Text;
+               i.Salary = Convert.ToDouble(salary.Text);
+               i.Address = address.Text;
+
+           });
+
+            var employee = from emp in dataInsessionList
+                           where emp.Id == id
+                           select emp;
+
+            Employee updatingEmpolyee = employee.First<Employee>();
+
             Session["staffData"] = dataInsessionList;
             employeeDetails = new List<Employee>() { updatingEmpolyee };
             detailGrid.EditIndex = -1;
@@ -85,6 +92,28 @@ namespace StaffRecord
         }
 
         protected void detailGrid_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            string idL = Session["id"].ToString();
+
+            int id = Convert.ToInt32(idL);
+            dataInSession = Session["staffData"];
+            dataInsessionList = (List<Employee>)dataInSession;
+            dataInsessionList.RemoveAll(s => s.Id == id);
+            DeleteNote.Text = "Deleted Successfully";
+            Session["staffData"] = dataInsessionList;
+            detailGrid.Visible = false;
+            
+
+
+            //DeleteNote
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("staffList.aspx");
+        }
+
+        protected void detailGrid_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

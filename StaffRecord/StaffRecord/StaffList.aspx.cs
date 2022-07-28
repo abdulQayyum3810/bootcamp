@@ -14,11 +14,10 @@ namespace StaffRecord
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
+            
                 staffList.DataSource = Session["staffData"];
                 staffList.DataBind();
-            }
+            
         }
         protected void OnRowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
         {
@@ -33,6 +32,12 @@ namespace StaffRecord
             string id = staffList.SelectedRow.Cells[0].Text;
             Session["id"] = id;
             Response.Redirect("DetailPage.aspx");
+        }
+
+        protected void staffList_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            staffList.PageIndex = e.NewPageIndex;
+            this.DataBind();
         }
     }
 }
