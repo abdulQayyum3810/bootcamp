@@ -83,6 +83,18 @@ namespace AspNetProject1
 
         }
         [WebMethod]
+        public static string UpdateCustomerWeb(int id, string fname, string lname, string email)
+        {
+            var customer = new Opperations();
+            customer.UpdateCustomer(id, fname, lname, email);
+            var data = customer.GetCustomers();
+            return customer.JsonConverter(data);
+
+        }
+
+
+
+        [WebMethod]
         public static string AddProductWeb(string name, string price)
         {
             var product = new Opperations();
@@ -92,17 +104,27 @@ namespace AspNetProject1
 
         }
         [WebMethod]
-        public static string UpdateCustomerWeb(int id,string fname,string lname,string email)
+        public static string DeleteProductWeb(int id)
         {
-            var customer = new Opperations();
-            customer.UpdateCustomer(id,fname,lname,email);
-            var data = customer.GetCustomers();
-            return customer.JsonConverter(data);
+            var product = new Opperations();
+            product.DeleteProduct(id);
+            var data = product.GetProducts();
+            return product.JsonConverter(data);
 
         }
 
-   
+        [WebMethod]
+        public static string UpdateProductWeb(int id,string name, string price)
+        {
+            var product = new Opperations();
+            product.UpdateProduct(id,name,Convert.ToDouble( price));
+            var data = product.GetProducts();
+            return product.JsonConverter(data);
+
+        }
+
         
+
 
     }
 }

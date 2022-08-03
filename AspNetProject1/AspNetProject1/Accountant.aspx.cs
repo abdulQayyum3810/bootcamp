@@ -12,28 +12,28 @@ namespace AspNetProject1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (!Page.IsPostBack)
-            //{
-            //    if (Session["user"] != null && Session["type"] != null)
-            //    {
-            //        if (Session["type"].ToString() == "admin")
-            //        {
-            //            Response.Redirect("Admin.aspx");
-            //        }
-            //        else if (Session["type"].ToString() == "accountant")
-            //        {
+            if (!Page.IsPostBack)
+            {
+                if (Session["user"] != null && Session["type"] != null)
+                {
+                    if (Session["type"].ToString() == "admin")
+                    {
+                        Response.Redirect("Admin.aspx");
+                    }
+                    else if (Session["type"].ToString() == "accountant")
+                    {
 
-            //        }
-            //        else
-            //        {
-            //            Response.Redirect("Login.aspx");
-            //        }
-            //    }
-            //    else
-            //    {
-            //        Response.Redirect("Login.aspx");
-            //    }
-            //}
+                    }
+                    else
+                    {
+                        Response.Redirect("Login.aspx");
+                    }
+                }
+                else
+                {
+                    Response.Redirect("Login.aspx");
+                }
+            }
         }
         [WebMethod]
         public static string GetAllCustomers()
