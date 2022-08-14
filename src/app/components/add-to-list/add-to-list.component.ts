@@ -23,6 +23,7 @@ description:string='';
   addTask(){
     console.log(this.title,this.description)
     this.tasks.push({title:this.title,description:this.description})
+    
   }
 
 }
