@@ -6,12 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  tasks:any[]=[{name:"pakistan"}]
+  tasks:any[]=[{title:"pakistan",description:"A very Good conuntry"}]
   
-  addTask(task:string){
+  addTask(title:string, description:string){
     try{
-    if (task){
-    this.tasks.push({name:task})
+    if (title && description){
+    this.tasks.push({title:title,description:description})
+
     }
   }
   catch(e){
@@ -21,6 +22,7 @@ export class AppComponent {
   deleteTask(index:number){
     console.log(index)
     this.tasks.splice(index,1)
+    
   }
 
 }
