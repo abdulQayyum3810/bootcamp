@@ -1,0 +1,5 @@
+
+<div class="form-group m-auto">
+    <label [for]="inputId"  >{{inputLabel}}</label>
+    <input [id]="inputId" #inputval (input)="sendInputVal(inputval.value)"  type="text" class="form-control mb-2">   
+</div>

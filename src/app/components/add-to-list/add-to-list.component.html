@@ -1,0 +1,4 @@
+    <h1 class="h1 text-center mb-5">Todo List App</h1>
+    <app-input-field inputId="title" inputLabel="Title" (inputVal)="titleVal($event)"> </app-input-field>
+    <app-input-field inputId="description" inputLabel="Description" (inputVal)="descriptionVal($event)"></app-input-field>
+    <app-button styleClass="btn btn-primary" text="Add Task" (btnClick)="addTask()"></app-button>

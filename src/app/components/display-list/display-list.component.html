@@ -1,0 +1,10 @@
+
+<ul class="list-group">
+    <li *ngFor="let task of tasks; let myindex=index;" class="list-group-item list-group-item-action ">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ task.title}}</h5>
+        </div>
+        <p class="mb-1">{{ task.description }}</p>
+        <app-button styleClass="btn btn-danger" text="Delete" (btnClick)="deleteTask(myindex)"></app-button>
+    </li>
+</ul> 
