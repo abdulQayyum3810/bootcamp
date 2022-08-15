@@ -1,0 +1,8 @@
+
+<div class="container mt-4 w-50">
+    <h3 class="h3 text-center mb-3">Employee List</h3>
+    <app-employee-list (selectedEmp)="setEmp($event)"></app-employee-list>
+    <hr>
+    
+    <app-employee-detail [emp]="emp" [available]="available" ></app-employee-detail>
+</div>
