@@ -18,6 +18,12 @@
             </tr>
         </tbody>
     </table>
+    <div class="d-flex justify-content-between">
 
+        <app-button styleClass="btn btn-primary d-inline-block" text="Previous" [disabled]="disabled" (btnClick)="previousEmp()"></app-button>
+        <app-button styleClass="btn btn-primary d-inline-block " text="Next" [disabled]="disabled" (btnClick)="nextEmp()"></app-button>
+
+    </div>
+    
 </div>
-<!-- <h1>{{ empDetails}}</h1> -->
+
