@@ -8,7 +8,7 @@ import { ManageEmployeeService } from '../../services/manage-employee.service';
 })
 export class EmployeeListComponent implements OnInit {
   @Output() selectedEmp= new EventEmitter<Employee>();
-  empList!:Employee[];
+  empList!:any;
   constructor(private manageEmployeeService:ManageEmployeeService) { 
   }
   selectEmp(emp:Employee){
@@ -16,7 +16,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.empList=this.manageEmployeeService.getEmployees()
+    this.empList=this.manageEmployeeService.getEmployees().subscribe(data=>{this.empList=data})
   }
 
 

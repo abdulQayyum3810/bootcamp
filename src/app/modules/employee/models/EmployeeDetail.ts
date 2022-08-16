@@ -1,5 +1,5 @@
 export class Employee{
-    id!:any;
-    name!:string;
+    Id!:any;
+    Name!:string;
     Department!:string;
 }

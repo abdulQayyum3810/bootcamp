@@ -1,21 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Employee } from '../models/EmployeeDetail';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ManageEmployeeService {
-employeesList: Employee[]=[{id:1,name:"Abdullah",Department:"Enginnering"},
-{id:2,name:"Imran",Department:"Development"},
-{id:3,name:"Khuram",Department:"Quality Assurance"},
-{id:3,name:"Ubaidullah",Department:"Computer Science"},
-{id:4,name:"Amjad",Department:"Artificial Intelligence"},
-{id:5,name:"Furqan",Department:"Quality Assurance"}
 
-]
-  constructor() { }
-getEmployees():Employee[]{
-  return this.employeesList
+  constructor(private http: HttpClient) { }
+  private url: string = "http://localhost/EmpAPI/api/values"
+getEmployees():Observable<object[]>{
+  return this.http.get<object[]>(this.url);
 }
 
 }

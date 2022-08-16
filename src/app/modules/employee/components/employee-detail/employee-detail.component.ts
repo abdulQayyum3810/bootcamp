@@ -11,7 +11,7 @@ export class EmployeeDetailComponent implements OnInit {
 @Input() emp!:Employee;
 @Input() available!:boolean;
 disabled:boolean=false;
-empList:Employee[]=this.manageEmployeeService.getEmployees()
+empList:any=this.manageEmployeeService.getEmployees().subscribe(data=>{this.empList=data})
   constructor(private manageEmployeeService:ManageEmployeeService) {
 
    }
@@ -21,19 +21,16 @@ empList:Employee[]=this.manageEmployeeService.getEmployees()
   previousEmp(){
    let a= this.empList.indexOf(this.emp);
     if(a>0){
-      if(a===0){
-        this.disabled=true
-      }
-      else{
-        this.disabled=false
-      }
       this.emp=this.empList[a-1]
+      
     }
+    console.log("next clicked",this.emp)
   }
   nextEmp(){
     let a= this.empList.indexOf(this.emp);
     if(a>0 && a<this.empList.length-1){
       this.emp=this.empList[a+1]
+      console.log("next clicked",this.emp)
   }
   
   

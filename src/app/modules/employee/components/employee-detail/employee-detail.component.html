@@ -1,19 +1,19 @@
 
 <div *ngIf="available" >
     <h1 class="h3 text-center mb-3">Employee Details</h1>
-    <table class="table table-striped">
-            <thead>
+    <table class="table table-bordered">
+            <thead class="thead-light">
                 <tr>
-                    <td>Id</td>
-                    <td>Name</td>
-                    <td>Department</td>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Department</th>
                 </tr>
             </thead>
             
         <tbody>
             <tr>
-                <td>{{emp.id}}</td>
-                <td>{{emp.name}}</td>
+                <td>{{emp.Id}}</td>
+                <td>{{emp.Name}}</td>
                 <td>{{emp.Department}}</td>
             </tr>
         </tbody>
@@ -26,4 +26,3 @@
     </div>
     
 </div>
-
