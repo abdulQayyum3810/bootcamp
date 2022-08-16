@@ -8,16 +8,22 @@ insert into student values('Usman','Quality Assurance');
 
 select * from student;
 
-DECLARE @Counter INT 
-SET @Counter=1
-WHILE ( @Counter <= 10)
+
+create PROCEDURE GenerateStudentData(@no int=10)
+AS
 BEGIN
-DECLARE @name varchar(150) 
-SET @name='Student '+ CAST(@Counter as varchar(150))
+	DECLARE @Counter INT 
+	SET @Counter=1
+	WHILE ( @Counter <= @no)
+	Begin
+		DECLARE @name varchar(150) 
+		SET @name='Student '+ CAST(@Counter as varchar(150))
 
-DECLARE @department varchar(150) 
-SET @department='Department '+ CAST(@Counter as varchar(150))
+		DECLARE @department varchar(150) 
+		SET @department='Department '+ CAST(@Counter as varchar(150))
 
-insert into student values(@name,@department);
-    SET @Counter  = @Counter  + 1
+		insert into student values(@name,@department);
+		SET @Counter  = @Counter  + 1
+	end
 END
+EXEC GenerateStudentData 15
