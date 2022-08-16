@@ -8,9 +8,11 @@ import { ManageEmployeeService } from '../../services/manage-employee.service';
 })
 export class EmployeeDetailComponent implements OnInit {
 
-@Input() emp!:Employee;
+
+@Input() empIndex!:number;
 @Input() available!:boolean;
 disabled:boolean=false;
+emp:any=this.manageEmployeeService.getEmpDetail(this.empIndex).subscribe(data=>{this.emp=data})
 empList:any=this.manageEmployeeService.getEmployees().subscribe(data=>{this.empList=data})
   constructor(private manageEmployeeService:ManageEmployeeService) {
 
@@ -19,12 +21,12 @@ empList:any=this.manageEmployeeService.getEmployees().subscribe(data=>{this.empL
   ngOnInit(): void {
   }
   previousEmp(){
-   let a= this.empList.indexOf(this.emp);
+   let a= this.emp.Id;
     if(a>0){
-      this.emp=this.empList[a-1]
+      this.emp=this.manageEmployeeService.getEmpDetail(1).subscribe(data=>{this.emp=data})
       
     }
-    console.log("next clicked",this.emp)
+    console.log("prev clicked",this.emp)
   }
   nextEmp(){
     let a= this.empList.indexOf(this.emp);

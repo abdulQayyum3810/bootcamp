@@ -9,9 +9,18 @@ import { HttpClient } from '@angular/common/http';
 export class ManageEmployeeService {
 
   constructor(private http: HttpClient) { }
-  private url: string = "http://localhost/EmpAPI/api/values"
+  private employeesUrl: string = "http://localhost/EmpAPI/api/values"
 getEmployees():Observable<object[]>{
-  return this.http.get<object[]>(this.url);
+  return this.http.get<object[]>(this.employeesUrl);
+}
+
+private empDetailUrl: string = "http://localhost/EmpDetailsAPI/api/values/"
+getEmpDetail(id:number):Observable<Employee>{
+  if(id==undefined)
+  {
+    id=1;
+  }
+  return this.http.get<Employee>(this.empDetailUrl+id);
 }
 
 }

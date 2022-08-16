@@ -7,16 +7,16 @@ import { Employee } from '../../models/EmployeeDetail';
   styleUrls: ['./container.component.css']
 })
 export class ContainerComponent implements OnInit {
-emp!:Employee;
+empIndex!:number;
 available:boolean=false;
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  setEmp(e:Employee){
+  setEmpIndex(e:Employee){
   this.available=true;
-  this.emp=e ;
-  console.log(e)
+  this.empIndex=e.Id ;
+  console.log(this.empIndex)
   }
 }
