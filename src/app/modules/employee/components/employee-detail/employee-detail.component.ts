@@ -9,33 +9,43 @@ import { ManageEmployeeService } from '../../services/manage-employee.service';
 export class EmployeeDetailComponent implements OnInit {
 
 
-@Input() empIndex!:number;
+@Input() emp!:any;
 @Input() available!:boolean;
 disabled:boolean=false;
-emp:any=this.manageEmployeeService.getEmpDetail(this.empIndex).subscribe(data=>{this.emp=data})
-empList:any=this.manageEmployeeService.getEmployees().subscribe(data=>{this.empList=data})
+
+
   constructor(private manageEmployeeService:ManageEmployeeService) {
-
+    
    }
-
+  empList:any=this.manageEmployeeService.getEmployees().subscribe(data=>{this.empList=data})
   ngOnInit(): void {
   }
   previousEmp(){
-   let a= this.emp.Id;
+   let a= this.getIndex();
     if(a>0){
-      this.emp=this.manageEmployeeService.getEmpDetail(1).subscribe(data=>{this.emp=data})
+
+      this.emp=this.manageEmployeeService.getEmpDetail(this.empList[a-1].Id).subscribe(data=>{this.emp=data})
       
     }
-    console.log("prev clicked",this.emp)
+    console.log("prev clicked2",this.emp)
   }
   nextEmp(){
-    let a= this.empList.indexOf(this.emp);
-    if(a>0 && a<this.empList.length-1){
-      this.emp=this.empList[a+1]
-      console.log("next clicked",this.emp)
-  }
-  
-  
+    let a= this.getIndex();
+    if(a<this.empList.length){
 
-}
+      this.emp=this.manageEmployeeService.getEmpDetail(this.empList[a+1].Id).subscribe(data=>{this.emp=data})
+      
+    }
+    console.log("next clicked",this.emp)
+  
+    
+  }
+  getIndex(){ 
+    let a=0;
+   for(let i=0;i<this.empList.length;i++){
+    if (this.empList[i].Id===this.emp.Id)
+      a=i;
+   }
+return a;
+    }
 }

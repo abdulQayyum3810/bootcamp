@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../../models/EmployeeDetail';
+import { ManageEmployeeService } from '../../services/manage-employee.service';
 
 @Component({
   selector: 'app-container',
@@ -7,16 +8,16 @@ import { Employee } from '../../models/EmployeeDetail';
   styleUrls: ['./container.component.css']
 })
 export class ContainerComponent implements OnInit {
-empIndex!:number;
+emp:any=this.manageEmployeeService.getEmpDetail(1).subscribe(data=>{this.emp=data})
 available:boolean=false;
-  constructor() { }
+  constructor(private manageEmployeeService: ManageEmployeeService) {  }
 
   ngOnInit(): void {
   }
 
   setEmpIndex(e:Employee){
   this.available=true;
-  this.empIndex=e.Id ;
-  console.log(this.empIndex)
+  this.emp=e;
+  console.log(this.emp)
   }
 }

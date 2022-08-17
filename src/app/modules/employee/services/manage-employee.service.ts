@@ -16,10 +16,7 @@ getEmployees():Observable<object[]>{
 
 private empDetailUrl: string = "http://localhost/EmpDetailsAPI/api/values/"
 getEmpDetail(id:number):Observable<Employee>{
-  if(id==undefined)
-  {
-    id=1;
-  }
+
   return this.http.get<Employee>(this.empDetailUrl+id);
 }
 
