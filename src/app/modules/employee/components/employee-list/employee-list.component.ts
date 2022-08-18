@@ -18,6 +18,13 @@ export class EmployeeListComponent implements OnInit {
   ngOnInit(): void {
     this.empList=this.manageEmployeeService.getEmployees().subscribe(data=>{this.empList=data})
   }
-
+  EmpUpdate(emp:Employee){
+    console.log(emp)
+  }
+  EmpDelete(emp:Employee){
+   let a:any=this.manageEmployeeService.DelEmployee(emp.Id).subscribe(data=>{a=data});
+   this.empList=this.manageEmployeeService.getEmployees().subscribe(data=>{this.empList=data})
+    console.log("deleted")
+  }
 
 }

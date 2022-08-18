@@ -11,7 +11,6 @@ export class EmployeeDetailComponent implements OnInit {
 
 @Input() emp!:any;
 @Input() available!:boolean;
-disabled:boolean=false;
 
 
   constructor(private manageEmployeeService:ManageEmployeeService) {

@@ -14,10 +14,25 @@ getEmployees():Observable<object[]>{
   return this.http.get<object[]>(this.employeesUrl);
 }
 
-private empDetailUrl: string = "http://localhost/EmpDetailsAPI/api/values/"
+private empDetailUrl: string = "http://localhost/OneEmpOpperations/EmployeeDetails/"
 getEmpDetail(id:number):Observable<Employee>{
 
   return this.http.get<Employee>(this.empDetailUrl+id);
 }
+
+private empDeleteUrl:string = "http://localhost/OneEmpOpperations//DelEmp/"
+DelEmployee(id:number):Observable<string>{
+
+  return this.http.get<string>(this.empDeleteUrl+id);
+}
+
+private empUpdateUrl: string = "http://localhost/OneEmpOpperations/UpdateEmployee"
+UpdateEmp(employee:Employee):Observable<string>{
+
+  return this.http.post<string>(this.empUpdateUrl, employee)
+  
+}
+
+
 
 }
