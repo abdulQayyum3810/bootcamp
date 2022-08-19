@@ -4,7 +4,35 @@
     <li *ngFor="let emp of empList; let myindex=index;" (click)="selectEmp(emp)" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
         {{emp.Name}}
         <span class="">
-            <app-button styleClass="btn btn-primary d-inline-block mr-2" text="Update"  (btnClick)="EmpUpdate(emp)"></app-button>
+            <button class="btn btn-primary d-inline-block mr-2" data-toggle="modal" data-target="#exampleModal" >Update</button>
+            
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Update Employee Information</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="alert alert-danger d-none text-center w-75 m-auto " role="alert">
+                        Please Enter Correct Information
+                    </div>
+                    <div class="alert alert-success d-none text-center w-75 m-auto" role="alert">
+                        Employee Details Updated Successfully
+                    </div> 
+                    <!-- <app-emp-form formType="Update"></app-emp-form> -->
+                    <input type="text" name="" id="" value="pakistan">
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save hhkhkh</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             <app-button styleClass="btn btn-danger d-inline-block" text="Delete"  (btnClick)="EmpDelete(emp)"></app-button>
         </span>
     </li>

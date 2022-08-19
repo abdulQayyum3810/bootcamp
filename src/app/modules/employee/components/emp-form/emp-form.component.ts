@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ManageEmployeeService } from '../../services/manage-employee.service';
 @Component({
@@ -26,8 +26,14 @@ formType!:string;
       ]]
     })
   }
-submit(){
-
+async submit(){
+  const formValues=this.empForm.value;
+  if (this.formType=="Update"){
+    console.log("Updated")
+  }
+  else if(this.formType==="Add"){
+    console.log("Added")
+  }
 }
 
 }

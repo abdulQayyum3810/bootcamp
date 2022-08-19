@@ -10,7 +10,7 @@ export class ModalComponent implements OnInit {
 @Input() sText=''
 @Input() title=''
 @Input() id!:string
-modalLabel=this.id+"Label"
+// modalLabel=this.id+"Label"
   constructor() { }
 
   ngOnInit(): void {
