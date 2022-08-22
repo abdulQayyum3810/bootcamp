@@ -9,6 +9,8 @@ import { ManageEmployeeService } from '../../services/manage-employee.service';
 export class EmployeeListComponent implements OnInit {
   @Output() selectedEmp= new EventEmitter<Employee>();
   empList!:any;
+  formType:string="Add";
+  emp!:Employee
   constructor(private manageEmployeeService:ManageEmployeeService) { 
   }
   selectEmp(emp:Employee){
@@ -17,9 +19,12 @@ export class EmployeeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.empList=this.manageEmployeeService.getEmployees().subscribe(data=>{this.empList=data})
+    this.emp={Id:0,Name:"",Department:""};
   }
   EmpUpdate(emp:Employee){
-    console.log(emp)
+    this.emp=emp
+    this.formType="Update"
+    
   }
   EmpDelete(emp:Employee){
    let a:any=this.manageEmployeeService.DelEmployee(emp.Id).subscribe(data=>{a=data});

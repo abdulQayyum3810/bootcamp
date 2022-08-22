@@ -30,7 +30,7 @@ export class EmployeeDetailComponent implements OnInit {
   }
   nextEmp(){
     let a= this.getIndex();
-    if(a<this.empList.length){
+    if(a<this.empList.length-1){
 
       this.emp=this.manageEmployeeService.getEmpDetail(this.empList[a+1].Id).subscribe(data=>{this.emp=data})
       

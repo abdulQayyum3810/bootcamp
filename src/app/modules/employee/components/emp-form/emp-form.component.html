@@ -1,15 +1,17 @@
-
-<form [formGroup]="empForm" (ngSubmit)="submit()" >
+<div class="mb-5 border border-info p-3">
+    <form [formGroup]="empForm" (ngSubmit)="submit()" >
+        <div class="form-group">
+        <label for="empName">Name</label>
+        <input type="text" id="empName" class="form-control" [value]="name" formControlName="empName">
+    </div>
     <div class="form-group">
-    <label for="empName">Name</label>
-    <input type="text" id="empName" class="form-control" formControlName="empName">
-</div>
-<div class="form-group">
-    <label for="empDept">Department</label>
-    <input type="text" id="empDept" class="form-control" formControlName="empDept">
+        <label for="empDept">Department</label>
+        <input type="text" id="empDept" class="form-control" [value]="dept" formControlName="empDept">
+    </div>
+    <button class="btn btn-primary d-inline-block" type="submit">{{formType}}</button>
+    </form>
     
-</div>
-<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-<app-button styleClass="btn btn-primary d-inline-block" [text]="formType" type="submit"></app-button>
-</form>
+    
 
+
+</div>

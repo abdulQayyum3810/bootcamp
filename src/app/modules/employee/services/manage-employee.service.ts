@@ -7,11 +7,11 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ManageEmployeeService {
-
+public formType:string="Add"
   constructor(private http: HttpClient) { }
   private employeesUrl: string = "http://localhost/EmpAPI/api/values"
-getEmployees():Observable<object[]>{
-  return this.http.get<object[]>(this.employeesUrl);
+getEmployees():Observable<Employee[]>{
+  return this.http.get<Employee[]>(this.employeesUrl);
 }
 
 private empDetailUrl: string = "http://localhost/OneEmpOpperations/EmployeeDetails/"
