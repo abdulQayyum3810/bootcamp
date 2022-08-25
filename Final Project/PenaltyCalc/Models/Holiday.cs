@@ -7,6 +7,7 @@ namespace PenaltyCalc.Models
 {
     public class Holiday
     {
+        // data structure to store holiday data
         public string Name { get; set; }
         public DateTime HolidayDate { get; set; }
         public string Country { get; set; }

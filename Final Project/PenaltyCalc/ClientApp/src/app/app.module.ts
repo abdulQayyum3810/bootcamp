@@ -28,6 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+  
     RouterModule.forRoot([
       { path: '', component: PenaltyCalculatorComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },

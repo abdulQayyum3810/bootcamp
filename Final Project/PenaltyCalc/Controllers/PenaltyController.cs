@@ -21,6 +21,9 @@ namespace PenaltyCalc.Controllers
         {
             _penaltyCalculator = penaltyCalculator;
         }
+
+
+        // get palenty of specific country and date range
         [Route("CalculatePenalty")]
         [HttpPost]
         public OutputData CalculatePenalty([FromBody] InputData data)
@@ -28,6 +31,7 @@ namespace PenaltyCalc.Controllers
             return _penaltyCalculator.CalculatePalenty(data.Checkout, data.Checkin, data.CountryName);
            
         }
+        // for testing purpose
         [Route("test")]
         [HttpPost]
         public List<string> test([FromBody] InputData data)
@@ -35,7 +39,7 @@ namespace PenaltyCalc.Controllers
             return new List<string>() { data.Checkin, data.Checkout, data.CountryName };
         }
 
-
+        // get countries list to populate in countries dropdown
         [Route("CountriesList")]
         [HttpGet]
         public List<string> CountriesList()

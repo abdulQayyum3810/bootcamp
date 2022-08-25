@@ -11,13 +11,14 @@ namespace PenaltyCalc.DataLayer
 {
     public class SqlDataHelper:ISqlDataHelper
     {
-        string conStr = "Data Source=CMDLHRDB01;Initial Catalog=4087-AspNetProject1;User ID=sa;Password=CureMD2022";
-        SqlConnection con = new SqlConnection("Data Source=CMDLHRDB01;Initial Catalog=4087-AspNetProject1;User ID=sa;Password=CureMD2022");
+        string conStr;
+        SqlConnection con;
         public SqlDataHelper(IConfiguration config)
         {
-            //string conStr = config.GetConnectionString("PenaltyDB");
+            conStr = config.GetConnectionString("PenaltyDB");
+            con = new SqlConnection(conStr);
         }
-        
+        // this method uses other methods to get all country data like name,weekends holidays
         public Country GetCountryData(string countryName)
         {
 
@@ -28,6 +29,8 @@ namespace PenaltyCalc.DataLayer
         }
         private Country GetCountryBasicInfo(string countryName)
         {
+            //execute country data sp which gives name, tax, palenty amount per day and currency 
+            //of the country then it stores in the coutry object and returns it
             con.Open();
             string query = "exec sp_GetCountryData @countryName;";
             SqlDataAdapter SDA = new SqlDataAdapter(query, con);
@@ -51,6 +54,7 @@ namespace PenaltyCalc.DataLayer
             return country;
         }
 
+        //execute sp_Getcountyholidays and store in holidays object and return it
 
         private List<Holiday> GetHolidays(string countryName)
         {
@@ -85,12 +89,14 @@ namespace PenaltyCalc.DataLayer
             return holidays;
 
         }
+        // Execute sp_getcountryweekends and returns weekend object which contains weekend details of 
+        // a specific country
         private List<Weekend> GetCountryWeekend(string countryName)
         {
             List<Weekend> weekends = new List<Weekend>();
           
             con.Open();
-            string query = " exec sp_GetCountryWeekend @countryName;";
+            string query = " exec sp_GetCountryWeekends @countryName;";
             SqlDataAdapter SDA = new SqlDataAdapter(query, con);
 
             SDA.SelectCommand.Parameters.AddWithValue("@countryName", countryName);
@@ -112,6 +118,7 @@ namespace PenaltyCalc.DataLayer
             return weekends;
 
         }
+        // returns the list of all countries available in database
         public List<string> GetCountriesList()
         {
             con.Open();

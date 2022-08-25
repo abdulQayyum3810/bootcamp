@@ -41,10 +41,12 @@ countryName!:string;
   async submit(){
     const formValues=this.paneltyForm.value;
     if (this.paneltyForm.valid){
+
       this.checkin=formValues.checkinDate
       this.checkout=formValues.checkoutDate
 
-      if(new Date(this.checkin)> new Date(this.checkout)){
+      if(new Date(this.checkin)>=new Date(this.checkout)){
+        this.penaltyAvailable=true;
         this.countryName=formValues.selectedCountry
         console.log(formValues.checkoutDate);
         let a:dataModel={Checkout:this.checkout,Checkin:this.checkin,CountryName:this.countryName}

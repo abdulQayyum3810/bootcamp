@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace PenaltyCalc.Models
 {
+    //object to store country data to be returned to business layer
     public class Country
     {
         public string Name { get; set; }

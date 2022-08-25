@@ -5,6 +5,7 @@ import { dataModel } from '../models/dataModel';
 import { recievedDataModel } from '../models/recievedDataModel';
 
 
+// service to get data like palenty and country list
 @Injectable({
   providedIn: 'root'
 })
