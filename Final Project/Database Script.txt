@@ -1,0 +1,138 @@
+USE [4087-AspNetProject1]
+
+--				TABLES
+--===============================================================================
+if not exists (select * from sysobjects where name='country'  and xtype='U')
+BEGIN
+    create table country(
+	countryName varchar(50) not null primary key,
+	specialTax decimal(10,2) default 0,
+	paneltyAmount decimal(10,2),
+	currency varchar(50)
+	);
+	END
+-------------------------------------------------------------------------------
+if not exists (select * from sysobjects where name='WeekDays'  and xtype='U')
+BEGIN
+   create table WeekDays(
+	dayCode int not null unique, /* 0.Sunday 1.Monday------>*/
+	dayName varchar(15) unique,
+	check(dayCode<=6));
+	END
+
+
+--------------------------------------------------------------------------
+
+	
+if not exists (select * from sysobjects where name='holiday'  and xtype='U')
+BEGIN
+   create table holiday(
+	holidayName varchar(150) not null,
+	holidayDate date not null,
+	country varchar(50) foreign key references country(countryName));
+
+	END
+--------------------------------------------------------------------
+	if not exists (select * from sysobjects where name='weekend'  and xtype='U')
+BEGIN
+   create Table weekend(
+	
+	dayCode int foreign key references WeekDays(dayCode),
+	WeekendDay varchar(15) not null references WeekDays(dayName),
+	country varchar(50) foreign key references country(countryName));
+
+	END
+
+
+
+
+--			PROCEDURES
+--=====================================================================
+
+IF EXISTS (
+         SELECT type_desc, type
+         FROM sys.procedures WITH(NOLOCK)
+         WHERE NAME = 'sp_GetCountryData'
+             AND type = 'P'
+       )
+      DROP PROCEDURE sp_GetCountryData
+ GO
+		 CREATE PROCEDURE  sp_GetCountryData(@countryName varchar(50))
+		AS
+		BEGIN
+			-- SET NOCOUNT ON added to prevent extra result sets from
+			-- interfering with SELECT statements.
+			select * from country 
+			where countryName =@countryName
+		END
+
+-------------------------------------------------------------------------------
+IF EXISTS (
+         SELECT type_desc, type
+         FROM sys.procedures WITH(NOLOCK)
+         WHERE NAME = 'sp_GetCountryWeekend'
+             AND type = 'P'
+       )
+      DROP PROCEDURE sp_GetCountryWeekend
+ GO
+		CREATE PROCEDURE  sp_GetCountryWeekend(@countryName varchar(50))
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	select *  from weekend 
+	where country =@countryName
+END
+----------------------------------------------------------------------------
+
+IF EXISTS (
+         SELECT type_desc, type
+         FROM sys.procedures WITH(NOLOCK)
+         WHERE NAME = 'sp_GetCountryHolidays'
+             AND type = 'P'
+       )
+      DROP PROCEDURE sp_GetCountryHolidays
+ GO
+		CREATE PROCEDURE  sp_GetCountryHolidays(@countryName varchar(50))
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	select * from holiday 
+	where country =@countryName
+END
+
+
+--				INSERT DATA
+--==========================================================================================
+
+
+BEGIN
+
+	DELETE WeekDays
+	DELETE country
+	DELETE weekend
+	DELETE holiday
+
+
+	insert into WeekDays values
+	(0,'Sunday'),
+	(1,'Moday'),
+	(2,'Tuesday'),
+	(3,'Wednesday'),
+	(4,'Thursday'),
+	(5,'Friday'),
+	(6,'Saturday');
+
+
+	insert into country values ('Pakistan',0,50, 'PKR'),('UAE',8,10, 'AED');
+
+	insert into weekend values (0,'Pakistan'),(6,'Pakistan'),(5,'UAE'),(6,'UAE');
+
+
+	insert into holiday values 
+		('Ashura Day 1', Cast('8/8/2022' AS date),'Pakistan'), /* mm/dd/yyyy */
+		('Ashura Day 2', CAST('8/9/2022' AS date),'Pakistan'),
+		('Independence Day', Cast('8/14/2022' AS date),'Pakistan')
+
+END
